@@ -1,6 +1,5 @@
 import { Mail, Phone, MapPin, Clock, Send, ChevronDown } from "lucide-react";
 import { useState, FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,10 +15,66 @@ export default function Contact() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // const handleSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
+
+  //   // Validate all required fields
+  //   if (!formData.subject) {
+  //     setErrorMessage("Please select a subject");
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+  //   setErrorMessage("");
+
+  //   try {
+  //     // EmailJS configuration
+  //     const serviceId = "service_otzjh9p"; // Replace with your EmailJS Service ID
+  //     const templateId = "template_m7p0pao"; // Replace with your EmailJS Template ID
+  //     const publicKey = "Qj7Ca2cTiPrzL8gNT"; // Replace with your EmailJS Public Key
+
+  //     // Prepare template parameters
+  //     const templateParams = {
+  //       from_name: formData.name,
+  //       from_email: "yourspace.vrajrealty99@gmail.com@gmail.com",
+  //       email: formData.email,
+  //       phone: formData.phone,
+  //       subject:
+  //         subjectOptions.find((opt) => opt.value === formData.subject)?.label ||
+  //         formData.subject,
+  //       message: formData.message,
+  //       to_email: formData.email, // Your email address
+  //     };
+
+  //     // Send email using EmailJS
+  //     await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+  //     setSubmitted(true);
+  //     setIsLoading(false);
+
+  //     // Reset form after 3 seconds
+  //     setTimeout(() => {
+  //       setSubmitted(false);
+  //       setFormData({
+  //         name: "",
+  //         email: "",
+  //         phone: "",
+  //         subject: "",
+  //         message: "",
+  //       });
+  //     }, 3000);
+  //   } catch (error) {
+  //     console.error("Email sending failed:", error);
+  //     setIsLoading(false);
+  //     setErrorMessage(
+  //       "Failed to send message. Please try again or contact us directly.",
+  //     );
+  //   }
+  // };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Validate all required fields
     if (!formData.subject) {
       setErrorMessage("Please select a subject");
       return;
@@ -28,51 +83,42 @@ export default function Contact() {
     setIsLoading(true);
     setErrorMessage("");
 
-    try {
-      // EmailJS configuration
-      const serviceId = "service_otzjh9p"; // Replace with your EmailJS Service ID
-      const templateId = "template_m7p0pao"; // Replace with your EmailJS Template ID
-      const publicKey = "Qj7Ca2cTiPrzL8gNT"; // Replace with your EmailJS Public Key
+    // Get proper subject label
+    const subjectLabel =
+      subjectOptions
+        .find((opt) => opt.value === formData.subject)
+        ?.label.replace(/[^\w\s]/gi, "") || formData.subject;
 
-      // Prepare template parameters
-      const templateParams = {
-        from_name: formData.name,
-        from_email: "yourspace.vrajrealty99@gmail.com@gmail.com",
-        email: formData.email,
-        phone: formData.phone,
-        subject:
-          subjectOptions.find((opt) => opt.value === formData.subject)?.label ||
-          formData.subject,
-        message: formData.message,
-        to_email: formData.email, // Your email address
-      };
+    const message = `
+Name: ${formData.name.trim()}
+Email: ${formData.email.trim()}
+Phone: ${formData.phone.trim()}
+Inquiry Type: ${subjectLabel}
 
-      // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+Message:
+${formData.message.trim()}
+`;
+    const whatsappNumber = "917203007569"; // Without + sign
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-      setSubmitted(true);
-      setIsLoading(false);
+    window.open(url, "_blank");
 
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: "",
-        });
-      }, 3000);
-    } catch (error) {
-      console.error("Email sending failed:", error);
-      setIsLoading(false);
-      setErrorMessage(
-        "Failed to send message. Please try again or contact us directly.",
-      );
-    }
+    // Reset form after opening WhatsApp
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
+
+    setSubmitted(true);
+    setIsLoading(false);
+
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 3000);
   };
-
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
