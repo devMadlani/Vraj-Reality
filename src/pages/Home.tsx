@@ -117,8 +117,8 @@ export default function Home() {
   ];
 
   const stats = [
-    { label: "Properties Sold", value: "2,500+" },
-    { label: "Happy Clients", value: "5,000+" },
+    { label: "Properties Sold", value: "350+" },
+    { label: "Happy Clients", value: "500+" },
     { label: "Years Experience", value: "20+" },
   ];
 
@@ -335,9 +335,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
+      <section className="py-10 md:py-20 bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="container flex flex-wrap w-full justify-around gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold mb-2">

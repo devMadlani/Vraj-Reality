@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">Vraj Realty</h3>
             <p className="text-gray-400 mb-4">
@@ -19,28 +19,30 @@ export default function Footer() {
               exceptional service and expertise in real estate.
             </p>
             <div className="flex space-x-4">
-              <a
+              {/* <a
                 href="#"
                 className="text-gray-400 hover:text-emerald-500 transition-colors"
               >
                 <Facebook size={20} />
-              </a>
+              </a> */}
               <a
-                href="#"
+                href="https://www.instagram.com/vraj_realty99"
+                target="_blank"
                 className="text-gray-400 hover:text-emerald-500 transition-colors"
               >
-                <Instagram size={20} />
+                <img src="/images/insta.svg" alt="insta" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/vraj-realty-0336163b5"
+                target="_blank"
                 className="text-gray-400 hover:text-emerald-500 transition-colors"
               >
-                <Linkedin size={20} />
+                <img src="/images/linkedin.svg" alt="Linkedin" />
               </a>
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <h4 className="text-lg font-semibold text-white mb-4">
               Quick Links
             </h4>
@@ -78,7 +80,7 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">
@@ -102,7 +104,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={18} className="text-emerald-500 flex-shrink-0" />
-                <span className="text-gray-400">
+                <span className="text-gray-400 break-all">
                   yourspace.vrajrealty99@gmail.com
                 </span>
               </li>
